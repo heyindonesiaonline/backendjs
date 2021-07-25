@@ -1,0 +1,23 @@
+paths:
+  /admin/product/:                # path of the product from your endpoint
+    post:                 # endpoint request type (post request)
+      tags:               # Tag property
+        - Products            # Value of the tag
+      summary: creates a new Product
+      
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                id:
+                  type: integer
+                name:
+                  type: string
+              example:
+                id: 10
+                name: Macbook
+      responses:          # server responses
+        201:
+          description: Ok. With An object with product details

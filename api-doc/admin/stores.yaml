@@ -1,0 +1,94 @@
+paths:
+  /admin/stores/:                # path of the store from your endpoint
+    post:                 # endpoint request type (post request)
+      tags:               # Tag property
+        - Stores            # Value of the tag
+      summary: creates a new store
+      produces:
+      - application/json
+      parameters:         # request parameters
+      - in: body          # request body
+        name: create store     # name of request, can be any name
+        description: It enables a store to create an store
+        required: false   # can also be true depending on store preference
+        schema:           # Schema definition
+          $ref: '#/definitions/createCat' 
+      responses:          # server responses
+        201:
+          description: An object with store details
+          schema:           # Schema definition
+            $ref: '#/definitions/createCat'
+    get:                 # endpoint request type (post request)
+      tags:               # Tag property
+        - Stores            # Value of the tag
+      summary: Get All List Stores
+      responses:          # server responses
+        201:
+          description: An object with store details
+  /admin/stores/:id:
+    get:                 # endpoint request type (post request)
+      tags:               # Tag property
+        - Stores            # Value of the tag
+      summary: Get Detail Stores
+      produces:
+      - application/json
+      parameters:
+      - name: id      # name of parameter passed
+        in: path      # parameters in the path
+        description: Path Parameter Stores ID
+        required: true
+        type: string
+      responses:          # server responses
+        201:
+          description: An object with store details
+    put:
+      tags:
+        - Stores
+      summary: Update stores Data
+      produces:
+      - application/json
+      parameters:
+      - name: id      # name of parameter passed
+        in: path      # parameters in the path
+        description: Path Parameter Stores ID
+        required: true
+        type: string
+      - in: body
+        name: update
+        description: stores Update basic Data
+        required: false
+        schema:
+          $ref: '#/definitions/updateCat'
+    delete:
+      tags:
+        - Stores
+      summary: Delete stores Data Permanently
+      produces:
+      - application/json
+      parameters:
+      - name: id      # name of parameter passed
+        in: path      # parameters in the path
+        description: path parameter takes the stores id
+        required: true
+        type: string
+definitions:        # Schema defination for request body
+  createCat:
+    type: object
+    properties:
+      name:
+        type: string
+      description:
+        type: string
+      status:
+        type: number
+  updateCat:
+    type: object
+    properties:
+      id:
+        type: string
+      name:
+        type: string
+      description:
+        type: string
+      status:
+        type: number

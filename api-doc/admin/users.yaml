@@ -1,0 +1,103 @@
+paths:
+  /v1/users/:                # path of the user from your endpoint
+    post:                 # endpoint request type (post request)
+      tags:               # Tag property
+        - User            # Value of the tag
+      summary: creates a new user
+      produces:
+      - application/json
+      parameters:         # request parameters
+      - in: body          # request body
+        name: sign up     # name of request, can be any name
+        description: It enables a user to create an account
+        required: false   # can also be true depending on user preference
+        schema:           # Schema definition
+          $ref: '#/definitions/createUser' 
+      responses:          # server responses
+        201:
+          description: An object with user details
+  /v1/users/login:
+    post:
+      tags:
+        - User
+      summary: make User Login
+      produces:
+      - application/json
+      parameters:
+      - in: body
+        name: login
+        description: User general login to access api
+        required: false
+        schema:
+          $ref: '#/definitions/login'
+  /v1/users/:id:
+    put:
+      tags:
+        - User
+      summary: Update User Basic Data
+      produces:
+      - application/json
+      parameters:
+      - name: id      # name of parameter passed
+        in: path      # parameters in the path
+        description: path parameter takes the pet id
+        required: true
+        type: string
+      - in: body
+        name: update
+        description: User Update basic Data
+        required: false
+        schema:
+          $ref: '#/definitions/updateUser'
+    delete:
+      tags:
+        - User
+      summary: Delete User Data Permanently
+      produces:
+      - application/json
+      parameters:
+      - name: id      # name of parameter passed
+        in: path      # parameters in the path
+        description: path parameter takes the pet id
+        required: true
+        type: string
+definitions:        # Schema defination for request body
+  createUser:
+    type: object
+    properties:
+      first:
+        type: string
+      last:
+        type: string
+      email:
+        type: string
+      phone:
+        type: string
+      password:
+        type: string
+      roleId:
+        type: number
+  login:
+    type: object
+    properties:
+      email:
+        type: string
+      password:
+        type: string
+  updateUser:
+    type: object
+    properties:
+      id:
+        type: string
+      first:
+        type: string
+      last:
+        type: string
+      email:
+        type: string
+      phone:
+        type: string
+      password:
+        type: string
+      roleId:
+        type: number
